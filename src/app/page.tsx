@@ -1,7 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/site/Container";
-import { OliveBranch, MillCircleDiagram, LeafDivider } from "@/components/site/motifs";
+import { LeafDivider } from "@/components/site/motifs";
 import { products } from "@/lib/products";
 
 export const metadata: Metadata = {
@@ -43,7 +44,16 @@ export default function Home() {
             </div>
           </div>
 
-          <OliveBranch className="h-auto w-full max-w-md justify-self-center text-gold/80 md:justify-self-end" />
+          <div className="relative aspect-4/3 w-full max-w-md justify-self-center overflow-hidden rounded-lg md:justify-self-end">
+            <Image
+              src="/images/hero-home.jpg"
+              alt="Uliveto secolare in Valle d'Itria al tramonto"
+              fill
+              priority
+              sizes="(min-width: 768px) 40vw, 90vw"
+              className="object-cover"
+            />
+          </div>
         </Container>
       </section>
 
@@ -77,8 +87,18 @@ export default function Home() {
             {products.map((product) => (
               <article
                 key={product.slug}
-                className="flex flex-col rounded-lg border border-border bg-card p-7"
+                className="flex flex-col overflow-hidden rounded-lg border border-border bg-card"
               >
+                <div className="relative aspect-4/3 w-full">
+                  <Image
+                    src={product.image}
+                    alt={`Bottiglia di olio ${product.name}`}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 90vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-7">
                 <h3 className="font-heading text-xl font-semibold text-ink">{product.name}</h3>
                 <p className="mt-1 text-sm font-medium text-terracotta">{product.tagline}</p>
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/75">{product.description}</p>
@@ -88,6 +108,7 @@ export default function Home() {
                 >
                   Scopri il {product.name} →
                 </Link>
+                </div>
               </article>
             ))}
           </div>
@@ -113,7 +134,15 @@ export default function Home() {
               Leggi la nostra storia →
             </Link>
           </div>
-          <MillCircleDiagram className="h-auto w-full max-w-xs justify-self-center text-gold/70" />
+          <div className="relative aspect-4/3 w-full max-w-sm justify-self-center overflow-hidden rounded-lg">
+            <Image
+              src="/images/frantoio-exterior.jpg"
+              alt="Facciata in pietra del frantoio a Locorotondo"
+              fill
+              sizes="(min-width: 768px) 35vw, 90vw"
+              className="object-cover"
+            />
+          </div>
         </Container>
       </section>
 

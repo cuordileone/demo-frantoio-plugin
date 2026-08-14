@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/site/Container";
 import { LeafDivider } from "@/components/site/motifs";
 import { products } from "@/lib/products";
@@ -32,7 +33,16 @@ export default function INostriOliPage() {
           {products.map((product, i) => (
             <article key={product.slug} className="grid gap-8 py-14 md:grid-cols-[0.4fr_1fr]">
               <div>
-                <span className="font-heading text-sm font-semibold text-terracotta">
+                <div className="relative aspect-4/5 w-full max-w-[220px] overflow-hidden rounded-lg">
+                  <Image
+                    src={product.image}
+                    alt={`Bottiglia di olio ${product.name}`}
+                    fill
+                    sizes="220px"
+                    className="object-cover"
+                  />
+                </div>
+                <span className="mt-5 block font-heading text-sm font-semibold text-terracotta">
                   0{i + 1}
                 </span>
                 <h2 className="mt-2 font-heading text-3xl font-semibold text-ink">{product.name}</h2>

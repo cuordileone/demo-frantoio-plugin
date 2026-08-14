@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/site/Container";
-import { LeafDivider, OliveBranch } from "@/components/site/motifs";
+import { LeafDivider } from "@/components/site/motifs";
 
 export const metadata: Metadata = {
   title: "Il Frantoio",
@@ -58,7 +59,15 @@ export default function IlFrantoioPage() {
               ne vende quello che avanza a chi lo cerca fatto bene.
             </p>
           </div>
-          <OliveBranch className="h-auto w-full max-w-sm justify-self-center text-olive/70" />
+          <div className="relative aspect-4/5 w-full max-w-sm justify-self-center overflow-hidden rounded-lg">
+            <Image
+              src="/images/frantoio-story.jpg"
+              alt="Dettaglio dell'antica macina in pietra del frantoio"
+              fill
+              sizes="(min-width: 768px) 35vw, 90vw"
+              className="object-cover"
+            />
+          </div>
         </Container>
       </section>
 
