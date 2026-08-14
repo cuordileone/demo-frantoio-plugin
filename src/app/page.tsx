@@ -1,69 +1,157 @@
-import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { Container } from "@/components/site/Container";
+import { OliveBranch, MillCircleDiagram, LeafDivider } from "@/components/site/motifs";
+import { products } from "@/lib/products";
+
+export const metadata: Metadata = {
+  title: "Olio extravergine spremuto a freddo in Valle d'Itria",
+  description:
+    "Frantoio Colle Sereno: olio extravergine d'oliva pugliese in lotti piccoli, spremuto a freddo entro poche ore dalla raccolta. Tre generazioni della stessa famiglia.",
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-ink text-cream">
+        <Container className="grid gap-12 py-20 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-28">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">
+              Locorotondo, Valle d&apos;Itria
+            </p>
+            <h1 className="mt-5 font-heading text-4xl leading-[1.08] font-semibold text-balance sm:text-5xl md:text-6xl">
+              Il tempo giusto per l&apos;olio è quello della raccolta, non del calendario.
+            </h1>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/80">
+              Spremiamo le nostre olive a freddo entro poche ore dalla raccolta, in lotti piccoli,
+              come fa la nostra famiglia da tre generazioni in questo angolo di Puglia.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link
+                href="/i-nostri-oli"
+                className="inline-flex h-12 items-center rounded-md bg-terracotta px-6 text-sm font-semibold text-cream transition-colors hover:bg-terracotta-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                Scopri i nostri oli
+              </Link>
+              <Link
+                href="/contatti"
+                className="text-sm font-semibold text-cream underline decoration-gold/60 underline-offset-4 hover:decoration-gold"
+              >
+                Scrivici per un ordine →
+              </Link>
+            </div>
+          </div>
+
+          <OliveBranch className="h-auto w-full max-w-md justify-self-center text-gold/80 md:justify-self-end" />
+        </Container>
+      </section>
+
+      {/* NUMERI CONCRETI */}
+      <section className="border-b border-border bg-stone">
+        <Container className="grid gap-10 py-14 sm:grid-cols-3">
+          {[
+            { value: "3", label: "generazioni della stessa famiglia al frantoio" },
+            { value: "< 6 ore", label: "dalla raccolta alla frangitura a freddo" },
+            { value: "3", label: "referenze, nessuna scorciatoia industriale" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p className="font-heading text-4xl font-semibold text-olive">{stat.value}</p>
+              <p className="mt-2 text-sm leading-relaxed text-ink/75">{stat.label}</p>
+            </div>
+          ))}
+        </Container>
+      </section>
+
+      {/* PRODOTTI */}
+      <section className="bg-stone">
+        <Container className="py-20">
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold tracking-[0.2em] text-terracotta uppercase">I nostri oli</p>
+            <h2 className="mt-3 font-heading text-3xl font-semibold text-ink sm:text-4xl">
+              Tre referenze, ogni anno le stesse piante.
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {products.map((product) => (
+              <article
+                key={product.slug}
+                className="flex flex-col rounded-lg border border-border bg-card p-7"
+              >
+                <h3 className="font-heading text-xl font-semibold text-ink">{product.name}</h3>
+                <p className="mt-1 text-sm font-medium text-terracotta">{product.tagline}</p>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/75">{product.description}</p>
+                <Link
+                  href="/i-nostri-oli"
+                  className="mt-6 inline-flex items-center text-sm font-semibold text-olive hover:text-olive-deep"
+                >
+                  Leggi di più →
+                </Link>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* STORIA TEASER */}
+      <section className="bg-ink text-cream">
+        <Container className="grid gap-10 py-20 md:grid-cols-2 md:items-center">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">Il frantoio</p>
+            <h2 className="mt-3 font-heading text-3xl font-semibold sm:text-4xl">
+              Iniziò nostro nonno, con un frantoio a pietra e un mulo.
+            </h2>
+            <p className="mt-5 max-w-md leading-relaxed text-cream/80">
+              Oggi le macchine sono cambiate, ma il metodo no: raccogliamo, portiamo le olive al
+              frantoio lo stesso giorno e non abbiamo mai smesso di lavorarle in piccoli lotti.
+            </p>
+            <Link
+              href="/il-frantoio"
+              className="mt-7 inline-flex items-center text-sm font-semibold text-cream underline decoration-gold/60 underline-offset-4 hover:decoration-gold"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Leggi la nostra storia →
+            </Link>
+          </div>
+          <MillCircleDiagram className="h-auto w-full max-w-xs justify-self-center text-gold/70" />
+        </Container>
+      </section>
+
+      {/* PROCESSO TEASER */}
+      <section className="bg-stone">
+        <Container className="py-20">
+          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-xl">
+              <p className="text-xs font-semibold tracking-[0.2em] text-terracotta uppercase">Il processo</p>
+              <h2 className="mt-3 font-heading text-3xl font-semibold text-ink sm:text-4xl">
+                Dalla pianta alla bottiglia, quattro passaggi, mai forzati.
+              </h2>
+            </div>
+            <Link
+              href="/il-processo"
+              className="inline-flex h-11 shrink-0 items-center rounded-md border border-olive px-5 text-sm font-semibold text-olive hover:bg-olive hover:text-cream"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+              Guarda come lavoriamo
+            </Link>
+          </div>
+          <LeafDivider className="mt-10 h-5 w-16 text-olive" />
+        </Container>
+      </section>
+
+      {/* CTA FINALE */}
+      <section className="bg-terracotta text-cream">
+        <Container className="flex flex-col items-start gap-6 py-16 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-heading text-2xl font-semibold sm:text-3xl">
+            Vuoi provare l&apos;olio di casa nostra?
+          </h2>
+          <Link
+            href="/contatti"
+            className="inline-flex h-12 shrink-0 items-center rounded-md bg-ink px-6 text-sm font-semibold text-cream transition-colors hover:bg-ink-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            Scrivici per un ordine
+          </Link>
+        </Container>
+      </section>
+    </>
   );
 }
