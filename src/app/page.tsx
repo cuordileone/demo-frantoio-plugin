@@ -86,7 +86,7 @@ export default function Home() {
                   href="/i-nostri-oli"
                   className="mt-6 inline-flex items-center text-sm font-semibold text-olive hover:text-olive-deep"
                 >
-                  Leggi di più →
+                  Scopri il {product.name} →
                 </Link>
               </article>
             ))}
